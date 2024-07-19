@@ -1,9 +1,17 @@
-// App.tsx
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
+  Image,
+} from 'react-native';
+import LoginPage from './LoginPage';
 
 const App = () => {
+  const [isLoginVisible, setLoginVisible] = useState(false);
+
   return (
     <View className="flex-1 bg-gray-900 p-5 justify-center">
       <Text className="text-white text-4xl font-bold mb-5">Sign Up</Text>
@@ -33,15 +41,31 @@ const App = () => {
         <Text className="text-white text-lg font-bold">Sign Up</Text>
       </TouchableOpacity>
       <Text className="text-gray-500 text-center mb-2">
-        Already a member? <Text className="text-purple-700">Login</Text>
+        Already a member?{' '}
+        <Text className="text-purple-700" onPress={() => setLoginVisible(true)}>
+          Login
+        </Text>
       </Text>
       <Text className="text-gray-500 text-center mb-2">or</Text>
       <TouchableOpacity className="flex-row bg-blue-700 rounded-lg p-4 items-center justify-center mb-2">
+        <Image
+          source={require('../assets/images/facebook-icon.png')}
+          className="w-6 h-6 mr-2"
+        />
         <Text className="text-white text-lg ml-2">Signup with Facebook</Text>
       </TouchableOpacity>
       <TouchableOpacity className="flex-row bg-red-700 rounded-lg p-4 items-center justify-center mb-2">
+      <Image
+          source={require('../assets/images/google-icon.png')}
+          className="w-6 h-6 mr-2"
+        />
         <Text className="text-white text-lg ml-2">Signup with Google</Text>
       </TouchableOpacity>
+
+      <LoginPage
+        isVisible={isLoginVisible}
+        onClose={() => setLoginVisible(false)}
+      />
     </View>
   );
 };
