@@ -15,7 +15,7 @@ function App() {
           tabBarStyle: { backgroundColor: '#333' }, // Customize tab bar style
         }}
       >
-        <Tab.Screen name="Home" component={HomePage} />
+        <Tab.Screen name="HomePage" component={HomePage} />
         {/* <Tab.Screen name="Another" component={AnotherScreen} /> */}
         {/* Add more tabs as needed */}
       </Tab.Navigator>

@@ -50,7 +50,7 @@ const HomePage = () => {
       </ScrollView>
 
       {/* Bottom Navigation Bar */}
-      <View className="absolute bottom-0 left-0 right-0 bg-[#14121F] p-4 flex-row justify-around shadow-2xl shadow-white">
+      <View className="absolute bottom-0 left-0 right-0 bg-[#14121F] p-4 flex-row justify-around">
         <TouchableOpacity>
           <Image
             source={require('../assets/images/searchoff.png')}
