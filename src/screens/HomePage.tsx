@@ -1,17 +1,29 @@
+"use client"
 import React from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 const recentlyPlayed = [
-  { id: 1, title: 'Song 1', artist: 'Artist 1' },
-  { id: 2, title: 'Song 2', artist: 'Artist 2' },
+  { id: 1, title: 'Blinding Lights', artist: 'The Weeknd' },
+  { id: 2, title: 'Watermelon Sugar', artist: 'Harry Styles' },
+  { id: 3, title: 'Levitating', artist: 'Dua Lipa' },
+  { id: 4, title: 'Save Your Tears', artist: 'The Weeknd' },
+  { id: 5, title: 'Peaches', artist: 'Justin Bieber' },
 ];
 
 const newReleases = [
-  { id: 1, title: 'New Release 1', artist: 'Artist 1' },
-  { id: 2, title: 'New Release 2', artist: 'Artist 2' },
+  { id: 1, title: 'Midnight City', artist: 'M83' },
+  { id: 2, title: 'Good 4 U', artist: 'Olivia Rodrigo' },
+  { id: 3, title: 'Kiss Me More', artist: 'Doja Cat' },
+  { id: 4, title: 'Industry Baby', artist: 'Lil Nas X' },
+  { id: 5, title: 'Montero (Call Me By Your Name)', artist: 'Lil Nas X' },
 ];
 
 const HomePage = () => {
+  const navigation = useNavigation();
+
   return (
     <View className="flex-1 bg-[#14121F]">
       {/* Profile Picture */}
@@ -51,7 +63,7 @@ const HomePage = () => {
 
       {/* Bottom Navigation Bar */}
       <View className="absolute bottom-0 left-0 right-0 bg-[#14121F] p-4 flex-row justify-around">
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
           <Image
             source={require('../assets/images/searchoff.png')}
             style={{ width: 24, height: 24 }}
