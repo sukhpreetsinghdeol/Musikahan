@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 
@@ -12,6 +13,8 @@ const newReleases = [
 ];
 
 const HomePage = () => {
+  const navigation = useNavigation();
+
   return (
     <View className="flex-1 bg-[#14121F]">
       {/* Profile Picture */}
@@ -59,7 +62,7 @@ const HomePage = () => {
 
       {/* Bottom Navigation Bar */}
       <View className="absolute bottom-0 left-0 right-0 bg-[#14121F] p-4 flex-row justify-around">
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
           <Image
             source={require('../assets/images/searchoff.png')}
             style={{width: 24, height: 24}}
