@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -5,6 +6,10 @@
  * @format
  */
 
+=======
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+>>>>>>> Stashed changes
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
@@ -17,6 +22,7 @@ import {
   View,
 } from 'react-native';
 
+<<<<<<< Updated upstream
 import {
   Colors,
   DebugInstructions,
@@ -24,6 +30,11 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+=======
+import HomePage from './src/screens/HomePage';
+import WelcomePage from './src/screens/WelcomePage';
+import SearchScreen from './src/screens/SearchScreen';
+>>>>>>> Stashed changes
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -32,6 +43,7 @@ type SectionProps = PropsWithChildren<{
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
+<<<<<<< Updated upstream
     <View style={styles.sectionContainer}>
       <Text
         style={[
@@ -52,6 +64,17 @@ function Section({children, title}: SectionProps): React.JSX.Element {
         {children}
       </Text>
     </View>
+=======
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Welcome" component={WelcomePage} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="Search" component={SearchScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+>>>>>>> Stashed changes
   );
 }
 
