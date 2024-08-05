@@ -110,7 +110,7 @@ import NavBar from '../designs/NavBar';
 const HomePage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuAnimation = useRef(new Animated.Value(-200)).current;
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const toggleMenu = () => {
     const toValue = isMenuVisible ? -200 : 0;
