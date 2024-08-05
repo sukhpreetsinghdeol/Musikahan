@@ -11,6 +11,7 @@ import {fontSize, iconSize, spacing} from './dimensions';
 import {NextButton, PlayPauseButton, PreviousButton} from './PlayerControls';
 import {useSharedValue} from 'react-native-reanimated';
 import {Slider} from 'react-native-awesome-slider';
+import MovingText from './MovingText';
 
 const imageURL =
   'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/152/325x325/1705340894_JZ2NifV4gB_2024---CARTOON-JEYJA---On--On-ft.-Daniel-Levi.jpg';
@@ -36,7 +37,12 @@ const FloatingPlayer = () => {
       <TouchableOpacity style={styles.container} activeOpacity={0.85}>
         <Image source={{uri: imageURL}} style={styles.coverImage} />
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>On & On (ft. Daniel Levi)</Text>
+          <MovingText
+            text="On & On (ft. Daniel Levi)"
+            animationThreshold={15}
+            style={styles.title}
+          />
+          {/* <Text style={styles.title}>On & On (ft. Daniel Levi)</Text> */}
           <Text style={styles.artist}>Cartoon, Daniel Levi, Jéja </Text>
         </View>
         <View style={styles.playerControlPlayer}>
@@ -64,6 +70,9 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     paddingHorizontal: spacing.sm,
+    overflow: 'hidden',
+    marginLeft: spacing.sm,
+    marginRight: spacing.sm,
   },
   title: {
     color: 'white',

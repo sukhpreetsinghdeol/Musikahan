@@ -5,6 +5,8 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
   Easing,
+  withDelay,
+  withRepeat,
 } from 'react-native-reanimated';
 
 const MovingText = ({text, animationThreshold, style}) => {
@@ -14,9 +16,9 @@ const MovingText = ({text, animationThreshold, style}) => {
 
   useEffect(() => {
     if (!shouldAnimate) return;
-    translateX.value = widthDelay(
+    translateX.value = withDelay(
       1000,
-      widthRepeat(
+      withRepeat(
         withTiming(-textWidth, {
           duration: 5000,
           easing: Easing.linear,
@@ -33,8 +35,14 @@ const MovingText = ({text, animationThreshold, style}) => {
     };
   });
   return (
-    <Animated.Text numberOfLines={1} style={[animatedStyle]}>
-      <Text>MovingText</Text>
+    <Animated.Text
+      numberOfLines={1}
+      style={[
+        animatedStyle,
+        style,
+        shouldAnimate && {width: 9999, paddingLeft: 16},
+      ]}>
+      {text}
     </Animated.Text>
   );
 };
@@ -42,10 +50,3 @@ const MovingText = ({text, animationThreshold, style}) => {
 export default MovingText;
 
 const styles = StyleSheet.create({});
-function widthDelay(arg0: number, arg1: any): number {
-  throw new Error('Function not implemented.');
-}
-
-function widthRepeat(arg0: any, p0: number, p1: boolean): any {
-  throw new Error('Function not implemented.');
-}
