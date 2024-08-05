@@ -108,16 +108,20 @@ import SongCategories from '../designs/SongCategories';
 const HomePage = () => {
   return (
     <View style={styles.container}>
-      {/* header */}
       <View style={styles.header}>
         <TouchableOpacity>
-          <Feather name="bell" color="white" size={iconSize.lg} />
+          <Feather name="bell" color={'white'} size={iconSize.lg} />
         </TouchableOpacity>
         <TouchableOpacity>
           <FontAwesome5 name="grip-lines" color="white" size={iconSize.lg} />
         </TouchableOpacity>
       </View>
       <SongCategories />
+    </View>
+  );
+};
+
+export default HomePage;
 
 // CSS Styles
 const styles = StyleSheet.create({
@@ -132,4 +136,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
   },
 });
-      
