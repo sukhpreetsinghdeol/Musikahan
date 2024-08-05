@@ -1,3 +1,5 @@
+'use client';
+import { useNavigation } from '@react-navigation/native';
 import {
   Dimensions,
   StyleSheet,
@@ -11,6 +13,17 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const {width, height} = Dimensions.get('window');
 const LikeScreen = () => {
+  const navigation = useNavigation();
+
+ 
+
+  const handleLibraryPage = () => {
+    console.log('Navigating to Library Page');
+    // Navigate to LibraryPage
+    navigation.navigate('Library'); // Match the route name defined in App.tsx
+  };
+
+
   return (
     <View style={styles.bottomContainer}>
       <View style={styles.bottomIconWrapper}>
@@ -22,7 +35,7 @@ const LikeScreen = () => {
           <Ionicons name="home-outline" size={35} color="#AB4DBA" />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={handleLibraryPage}>
           <MaterialIcons name="library-music" size={35} color="#AB4DBA" />
         </TouchableOpacity>
       </View>
