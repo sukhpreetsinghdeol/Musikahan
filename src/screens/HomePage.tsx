@@ -118,11 +118,6 @@ const HomePage = () => {
         </TouchableOpacity>
       </View>
       <SongCategories />
-    </View>
-  );
-};
-
-export default HomePage;
 
 // CSS Styles
 const styles = StyleSheet.create({
@@ -137,3 +132,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
   },
 });
+      
