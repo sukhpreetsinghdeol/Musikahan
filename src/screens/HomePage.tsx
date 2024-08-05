@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {fontSize, iconSize, spacing} from '../designs/dimensions';
-import Songs from '../designs/songs';
+import {iconSize, spacing} from '../designs/dimensions';
 import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
 

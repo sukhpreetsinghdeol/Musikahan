@@ -13,9 +13,14 @@ export const PreviousButton = ({size = iconSize.lg}) => {
 };
 
 export const PlayPauseButton = ({size = iconSize.lg}) => {
+  const isPlaying = true;
   return (
     <TouchableOpacity activeOpacity={0.85}>
-      <AntDesign name={'pausecircleo'} size={size} color="white" />
+      <AntDesign
+        name={isPlaying ? 'pausecircleo' : 'playcircleo'}
+        size={size}
+        color="white"
+      />
     </TouchableOpacity>
   );
 };
