@@ -1,17 +1,20 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {fontSize, spacing} from './dimensions';
+import TrackPlayer from 'react-native-track-player';
 
-// cover images
-const imageUrl =
-  'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/568/100x100/godslayer-1700528454-rTWxGyR4Bq.jpg';
-
-const Songs = () => {
+const Songs = ({item, containerStyle, imageStyle, handlePlay}) => {
   return (
-    <TouchableOpacity style={styles.containerHeader}>
-      <Image source={{uri: imageUrl}} style={styles.coverImage} />
-      <Text style={styles.songTitle}>Sold Dreams</Text>
-      <Text style={styles.songArtist}>1$K1</Text>
+    <TouchableOpacity
+      style={[styles.containerHeader, containerStyle]}
+      onPress={() => handlePlay(item)}>
+      <Image source={item.artwork} style={[styles.coverImage, imageStyle]} />
+      <Text style={styles.songTitle} numberOfLines={1}>
+        {item.title}
+      </Text>
+      <Text style={styles.songArtist} numberOfLines={1}>
+        {item.artist}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -20,7 +23,7 @@ export default Songs;
 
 const styles = StyleSheet.create({
   containerHeader: {
-    height: 270,
+    height: 300,
     width: 270,
     paddingVertical: 20,
     paddingHorizontal: 15,

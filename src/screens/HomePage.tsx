@@ -1,6 +1,10 @@
 'use client';
 import {useNavigation} from '@react-navigation/native';
+<<<<<<< HEAD
 import React, { useState, useRef } from 'react';
+=======
+import React, {useState, useRef} from 'react';
+>>>>>>> origin/main
 import {
   View,
   Text,
@@ -9,6 +13,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
+<<<<<<< HEAD
   Animated
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
@@ -18,6 +23,18 @@ import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
 import NavBar from '../designs/NavBar';
  
+=======
+  Animated,
+} from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {iconSize, spacing} from '../designs/dimensions';
+import SongCategories from '../designs/SongCategories';
+import FloatingPlayer from '../designs/FloatingPlayer';
+import NavBar from '../designs/NavBar';
+import {SongsWithCategory} from '../data/SongsWithCategory';
+
+>>>>>>> origin/main
 // const recentlyPlayed = [
 //   {id: 1, title: 'Song 1', artist: 'Artist 1'},
 //   {id: 2, title: 'Song 2', artist: 'Artist 2'},
@@ -110,33 +127,56 @@ import NavBar from '../designs/NavBar';
 const HomePage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuAnimation = useRef(new Animated.Value(-200)).current;
+<<<<<<< HEAD
   const navigation = useNavigation();
  
   const toggleMenu = () => {
     const toValue = isMenuVisible ? -200 : 0;
  
+=======
+  const navigation = useNavigation<any>();
+
+  const toggleMenu = () => {
+    const toValue = isMenuVisible ? -200 : 0;
+
+>>>>>>> origin/main
     Animated.timing(menuAnimation, {
       toValue,
       duration: 200,
       useNativeDriver: true,
     }).start();
+<<<<<<< HEAD
  
     setIsMenuVisible(!isMenuVisible);
   };
  
+=======
+
+    setIsMenuVisible(!isMenuVisible);
+  };
+
+>>>>>>> origin/main
   const handleLogOut = () => {
     console.log('Logged out');
     // Navigate to LoginPage
     navigation.navigate('SignUp');
   };
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> origin/main
   const handleLikedSongs = () => {
     console.log('Liked Songs');
     // Navigate to LikeScreen
     navigation.navigate('LikeScreen');
   };
+<<<<<<< HEAD
  
  
+=======
+
+>>>>>>> origin/main
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -147,6 +187,7 @@ const HomePage = () => {
           <FontAwesome5 name="grip-lines" color="white" size={iconSize.lg} />
         </TouchableOpacity>
       </View>
+<<<<<<< HEAD
  
      {/* Sidebar Menu */}
      {isMenuVisible && (
@@ -156,36 +197,74 @@ const HomePage = () => {
             { transform: [{ translateX: menuAnimation }] }
           ]}
         >
+=======
+      <View>
+        <Text style={styles.headingTextContainer}>
+          Discover more with Musikahan
+        </Text>
+      </View>
+
+      {/* Sidebar Menu */}
+      {isMenuVisible && (
+        <Animated.View
+          style={[styles.menu, {transform: [{translateX: menuAnimation}]}]}>
+>>>>>>> origin/main
           <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
             <Text style={styles.closeButtonText}>×</Text>
           </TouchableOpacity>
           <View style={styles.menuContent}>
             <Text style={styles.username}>Username</Text>
+<<<<<<< HEAD
             <TouchableOpacity style={styles.menuItem} onPress={handleLikedSongs}>
               <FontAwesome5 name="heart" color="#FFFFFF" size={20} />
               <Text style={styles.menuItemText}>Liked Songs</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.logOutButton} onPress={handleLogOut}>
+=======
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={handleLikedSongs}>
+              <FontAwesome5 name="heart" color="#FFFFFF" size={20} />
+              <Text style={styles.menuItemText}>Liked Songs</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.logOutButton}
+              onPress={handleLogOut}>
+>>>>>>> origin/main
               <FontAwesome5 name="sign-out-alt" color="#FFFFFF" size={20} />
               <Text style={styles.logOutText}>Log Out</Text>
             </TouchableOpacity>
           </View>
         </Animated.View>
       )}
+<<<<<<< HEAD
  
       <FlatList
         data={[1, 2, 3]}
         renderItem={SongCategories}
         contentContainerStyle={{ paddingBottom: 300 }}
+=======
+
+      <FlatList
+        data={SongsWithCategory}
+        renderItem={SongCategories}
+        contentContainerStyle={{paddingBottom: 300}}
+>>>>>>> origin/main
       />
       <FloatingPlayer />
       <NavBar />
     </View>
   );
 };
+<<<<<<< HEAD
  
 export default HomePage;
  
+=======
+
+export default HomePage;
+
+>>>>>>> origin/main
 // CSS Styles
 const styles = StyleSheet.create({
   container: {
@@ -197,6 +276,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 20,
     paddingHorizontal: 16,
+<<<<<<< HEAD
   },
   headingText: {
     fontSize: 23,
@@ -276,3 +356,91 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
+=======
+  },
+  headingTextContainer: {
+    fontSize: 25,
+    color: 'white',
+    textAlign: 'center',
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.md,
+  },
+  menu: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 250,
+    height: '100%',
+    backgroundColor: '#2C2C2C',
+    borderTopLeftRadius: 16,
+    borderBottomLeftRadius: 16,
+    padding: 15,
+    shadowOffset: {width: -2, height: 0},
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    zIndex: 1000,
+  },
+  headingText: {
+    fontSize: 23,
+    color: 'white',
+    textAlign: 'center',
+  },
+  menuContent: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: 50,
+  },
+  username: {
+    color: '#FFFFFF',
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  menuItem: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginBottom: 12,
+    backgroundColor: '#3E3E3E',
+    elevation: 2,
+  },
+  menuItemText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    marginLeft: 16,
+  },
+  logOutButton: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    backgroundColor: '#A32979',
+    elevation: 2,
+  },
+  logOutText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    marginLeft: 16,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 15,
+    left: 15,
+    backgroundColor: '#3E3E3E',
+    borderRadius: 50,
+    padding: 10,
+    elevation: 5,
+  },
+  closeButtonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+  },
+});
+>>>>>>> origin/main
