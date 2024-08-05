@@ -10,6 +10,7 @@ import SearchScreen from './src/screens/SearchScreen';
 import LikeScreen from './src/screens/LikeScreen';
 import PlayerScreen from './src/screens/PlayerScreen';
 import {useSetupTrackPlayer} from './src/hooks/useSetupTrackPlayer';
+import LibraryPage from './src/screens/LibraryPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,9 +24,7 @@ function App(): React.JSX.Element {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{headerShown: false}}
-          initialRouteName="Home">
+        <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Welcome" component={WelcomePage} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Login" component={LoginPage} />
@@ -33,6 +32,7 @@ function App(): React.JSX.Element {
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="LikeScreen" component={LikeScreen} />
           <Stack.Screen name="PlayerScreen" component={PlayerScreen} />
+          <Stack.Screen name="Library" component={LibraryPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

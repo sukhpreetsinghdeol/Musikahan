@@ -9,6 +9,7 @@ import {
   PreviousButton,
 } from '../designs/PlayerControls';
 import {useNavigation} from '@react-navigation/native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const imageURL =
   'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/725/325x325/1721817328_whh1S1CyIp_artwork.jpg';
@@ -16,12 +17,14 @@ const imageURL =
 const PlayerScreen = () => {
   const navigation = useNavigation();
   const isLiked = true;
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       {/* HEADER */}
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <AntDesign name="arrowleft" size={iconSize.lg} color={'white'} />
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <FontAwesome5 name="arrow-left" color={'white'} size={iconSize.lg} />
         </TouchableOpacity>
         <Text style={styles.headerText}>Playing Now</Text>
       </View>

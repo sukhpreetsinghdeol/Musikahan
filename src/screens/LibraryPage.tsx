@@ -8,10 +8,10 @@ import Songs from '../designs/Songs';
 import FloatingPlayer from '../designs/FloatingPlayer';
 import NavBar from '../designs/NavBar';
 
-const LikeScreen = () => {
+const LibraryPage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuAnimation = useRef(new Animated.Value(-250)).current; // Start off-screen
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const toggleMenu = () => {
     const toValue = isMenuVisible ? -250 : 0;
@@ -103,7 +103,7 @@ const LikeScreen = () => {
 };
 
 
-export default LikeScreen;
+export default LibraryPage;
 
 const styles = StyleSheet.create({
   container: {
