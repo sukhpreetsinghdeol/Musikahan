@@ -8,20 +8,22 @@ import {
   PlayPauseButton,
   PreviousButton,
 } from '../designs/PlayerControls';
+import {useNavigation} from '@react-navigation/native';
 
 const imageURL =
   'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/725/325x325/1721817328_whh1S1CyIp_artwork.jpg';
 
 const PlayerScreen = () => {
+  const navigation = useNavigation();
   const isLiked = true;
   return (
     <View style={styles.container}>
       {/* HEADER */}
       <View style={styles.headerContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <AntDesign name="arrowleft" size={iconSize.lg} color={'white'} />
         </TouchableOpacity>
-        <Text style={styles.headerText}>Songs</Text>
+        <Text style={styles.headerText}>Playing Now</Text>
       </View>
       {/* IMAGE */}
       <View style={styles.coverImageContainer}>
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: spacing.xxl,
-    marginTop: 80,
+    marginTop: 50,
   },
   coverImage: {
     height: 300,

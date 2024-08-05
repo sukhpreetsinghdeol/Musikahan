@@ -7,6 +7,7 @@ import {useSharedValue} from 'react-native-reanimated';
 import {Slider} from 'react-native-awesome-slider';
 import MovingText from './MovingText';
 import {useNavigation} from '@react-navigation/native';
+import TrackPlayer from 'react-native-track-player';
 
 const imageURL =
   'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/152/325x325/1705340894_JZ2NifV4gB_2024---CARTOON-JEYJA---On--On-ft.-Daniel-Levi.jpg';
@@ -33,6 +34,16 @@ const FloatingPlayer = () => {
           thumbWidth={10}
           containerStyle={{}}
           renderBubble={() => null}
+          onSlidingStart={() => (isSliding.value = true)}
+          onValueChange={async value => {
+            await TrackPlayer.seekTo(value * duration);
+          }}
+          onSlidingComplete={async value => {
+            if (!isSliding.value) {
+              return;
+            }
+            isSliding.value = false;
+          }}
         />
       </View>
       <TouchableOpacity

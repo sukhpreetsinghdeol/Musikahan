@@ -16,6 +16,7 @@ import {iconSize, spacing} from '../designs/dimensions';
 import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
 import NavBar from '../designs/NavBar';
+import {SongsWithCategory} from '../data/SongsWithCategory';
 
 // const recentlyPlayed = [
 //   {id: 1, title: 'Song 1', artist: 'Artist 1'},
@@ -118,9 +119,12 @@ const HomePage = () => {
           <FontAwesome5 name="grip-lines" color="white" size={iconSize.lg} />
         </TouchableOpacity>
       </View>
+      <View>
+        <Text style={styles.headingText}>Discover more with Musikahan</Text>
+      </View>
 
       <FlatList
-        data={[1, 2, 3]}
+        data={SongsWithCategory}
         renderItem={SongCategories}
         contentContainerStyle={{paddingBottom: 300}}
       />
@@ -143,5 +147,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: spacing.lg,
     paddingHorizontal: spacing.md,
+  },
+  headingText: {
+    fontSize: 25,
+    color: 'white',
+    textAlign: 'center',
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.md,
   },
 });
