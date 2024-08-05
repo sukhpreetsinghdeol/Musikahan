@@ -17,7 +17,7 @@ const imageURL =
 const PlayerScreen = () => {
   const navigation = useNavigation();
   const isLiked = true;
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
