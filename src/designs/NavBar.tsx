@@ -8,21 +8,23 @@ import {
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 const LikeScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.bottomContainer}>
       <View style={styles.bottomIconWrapper}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
           <Ionicons name="search-outline" size={35} color="#AB4DBA" />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Ionicons name="home-outline" size={35} color="#AB4DBA" />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Library')}>
           <MaterialIcons name="library-music" size={35} color="#AB4DBA" />
         </TouchableOpacity>
       </View>

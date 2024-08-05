@@ -2,6 +2,12 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {iconSize, fontSize, spacing} from '../designs/dimensions';
+import ProgressBar from '../designs/ProgressBar';
+import {
+  NextButton,
+  PlayPauseButton,
+  PreviousButton,
+} from '../designs/PlayerControls';
 
 const imageURL =
   'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/725/325x325/1721817328_whh1S1CyIp_artwork.jpg';
@@ -29,6 +35,7 @@ const PlayerScreen = () => {
             Egzod, Neoni, Maestro Chives, Warriyo
           </Text>
         </View>
+        {/* ICON CONTAINER */}
         <TouchableOpacity>
           <AntDesign
             name={isLiked ? 'hearto' : 'heart'}
@@ -36,6 +43,13 @@ const PlayerScreen = () => {
             size={iconSize.sm}
           />
         </TouchableOpacity>
+      </View>
+      {/* PLAYER PROGRESS BAR */}
+      <ProgressBar />
+      <View style={styles.playPauseControl}>
+        <PreviousButton size={iconSize.xxl} />
+        <PlayPauseButton size={iconSize.xxl} />
+        <NextButton size={iconSize.xxl} />
       </View>
     </View>
   );
@@ -63,7 +77,8 @@ const styles = StyleSheet.create({
   coverImageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    margin: spacing.xl,
+    margin: spacing.xxl,
+    marginTop: 80,
   },
   coverImage: {
     height: 300,
@@ -78,6 +93,20 @@ const styles = StyleSheet.create({
     fontSize: fontSize.md,
     color: 'white',
   },
-  titleContainer: {},
-  heartRow: {},
+  titleContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  heartRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  playPauseControl: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: spacing.xl,
+    marginTop: spacing.xl,
+  },
 });

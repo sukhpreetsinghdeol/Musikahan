@@ -30,7 +30,9 @@ const FloatingPlayer = () => {
           progress={progress}
           minimumValue={min}
           maximumValue={max}
+          thumbWidth={10}
           containerStyle={{}}
+          renderBubble={() => null}
         />
       </View>
       <TouchableOpacity
