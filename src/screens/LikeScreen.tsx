@@ -27,7 +27,7 @@ const LikeScreen = () => {
 
   const handleLogOut = () => {
     console.log('Logged out');
-    navigation.navigate('LoginPage');
+    navigation.navigate('SignUp');
   };
 
   const handleLikedSongs = () => {

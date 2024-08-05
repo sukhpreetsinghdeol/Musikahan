@@ -127,7 +127,7 @@ const HomePage = () => {
   const handleLogOut = () => {
     console.log('Logged out');
     // Navigate to LoginPage
-    navigation.navigate('LoginPage');
+    navigation.navigate('SignUp');
   };
 
   const handleLikedSongs = () => {
