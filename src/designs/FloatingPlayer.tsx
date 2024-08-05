@@ -18,15 +18,19 @@ const imageURL =
 const FloatingPlayer = () => {
   const progress = useSharedValue(30);
   const min = useSharedValue(0);
-  const max = useSharedValue(100);
+  const max = useSharedValue(1);
   return (
     <View>
-      <View>
+      <View
+        style={{
+          zIndex: 1,
+        }}>
         <Slider
           style={styles.container}
           progress={progress}
           minimumValue={min}
           maximumValue={max}
+          containerStyle={{}}
         />
       </View>
       <TouchableOpacity style={styles.container} activeOpacity={0.85}>
@@ -55,6 +59,7 @@ const styles = StyleSheet.create({
   coverImage: {
     height: 68,
     width: 68,
+    resizeMode: 'center',
   },
   titleContainer: {
     flex: 1,
