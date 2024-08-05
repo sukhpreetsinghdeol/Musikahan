@@ -116,7 +116,11 @@ const HomePage = () => {
           <FontAwesome5 name="grip-lines" color="white" size={iconSize.lg} />
         </TouchableOpacity>
       </View>
-      <SongCategories />
+      <FlatList
+        data={[1, 2, 3]}
+        renderItem={SongCategories}
+        contentContainerStyle={{paddingBottom: 300}}
+      />
     </View>
   );
 };

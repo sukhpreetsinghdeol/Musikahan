@@ -20,7 +20,7 @@ export default Songs;
 
 const styles = StyleSheet.create({
   containerHeader: {
-    height: 270,
+    height: 300,
     width: 270,
     paddingVertical: 20,
     paddingHorizontal: 15,
