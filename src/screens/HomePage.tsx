@@ -1,6 +1,6 @@
 'use client';
 import {useNavigation} from '@react-navigation/native';
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   Text,
@@ -9,14 +9,15 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
-  Animated
+  Animated,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { iconSize, spacing } from '../designs/dimensions';
+import {iconSize, spacing} from '../designs/dimensions';
 import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
 import NavBar from '../designs/NavBar';
+import {SongsWithCategory} from '../data/SongsWithCategory';
 
 // const recentlyPlayed = [
 //   {id: 1, title: 'Song 1', artist: 'Artist 1'},
@@ -136,7 +137,6 @@ const HomePage = () => {
     navigation.navigate('LikeScreen');
   };
 
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -147,25 +147,30 @@ const HomePage = () => {
           <FontAwesome5 name="grip-lines" color="white" size={iconSize.lg} />
         </TouchableOpacity>
       </View>
+      <View>
+        <Text style={styles.headingTextContainer}>
+          Discover more with Musikahan
+        </Text>
+      </View>
 
-     {/* Sidebar Menu */}
-     {isMenuVisible && (
+      {/* Sidebar Menu */}
+      {isMenuVisible && (
         <Animated.View
-          style={[
-            styles.menu,
-            { transform: [{ translateX: menuAnimation }] }
-          ]}
-        >
+          style={[styles.menu, {transform: [{translateX: menuAnimation}]}]}>
           <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
             <Text style={styles.closeButtonText}>×</Text>
           </TouchableOpacity>
           <View style={styles.menuContent}>
             <Text style={styles.username}>Username</Text>
-            <TouchableOpacity style={styles.menuItem} onPress={handleLikedSongs}>
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={handleLikedSongs}>
               <FontAwesome5 name="heart" color="#FFFFFF" size={20} />
               <Text style={styles.menuItemText}>Liked Songs</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.logOutButton} onPress={handleLogOut}>
+            <TouchableOpacity
+              style={styles.logOutButton}
+              onPress={handleLogOut}>
               <FontAwesome5 name="sign-out-alt" color="#FFFFFF" size={20} />
               <Text style={styles.logOutText}>Log Out</Text>
             </TouchableOpacity>
@@ -174,9 +179,9 @@ const HomePage = () => {
       )}
 
       <FlatList
-        data={[1, 2, 3]} 
+        data={SongsWithCategory}
         renderItem={SongCategories}
-        contentContainerStyle={{ paddingBottom: 300 }}
+        contentContainerStyle={{paddingBottom: 300}}
       />
       <FloatingPlayer />
       <NavBar />
@@ -198,10 +203,12 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 16,
   },
-  headingText: {
-    fontSize: 23,
+  headingTextContainer: {
+    fontSize: 25,
     color: 'white',
     textAlign: 'center',
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.md,
   },
   menu: {
     position: 'absolute',
@@ -213,10 +220,15 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,
     padding: 15,
-    shadowOffset: { width: -2, height: 0 },
+    shadowOffset: {width: -2, height: 0},
     shadowOpacity: 0.2,
     shadowRadius: 10,
     zIndex: 1000,
+  },
+  headingText: {
+    fontSize: 23,
+    color: 'white',
+    textAlign: 'center',
   },
   menuContent: {
     flex: 1,
