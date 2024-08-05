@@ -1,7 +1,7 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {spacing} from './dimensions';
-import Songs from './songs';
+import Songs from './Songs';
 
 const SongCategories = () => {
   return (
