@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
+
 
 const {width, height} = Dimensions.get('window');
 const LikeScreen = () => {
