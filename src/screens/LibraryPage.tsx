@@ -11,7 +11,7 @@ import NavBar from '../designs/NavBar';
 const LibraryPage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuAnimation = useRef(new Animated.Value(-250)).current; // Start off-screen
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const toggleMenu = () => {
     const toValue = isMenuVisible ? -250 : 0;
