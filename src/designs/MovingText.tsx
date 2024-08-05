@@ -17,7 +17,7 @@ const MovingText = ({text, animationThreshold, style}) => {
   useEffect(() => {
     if (!shouldAnimate) return;
     translateX.value = withDelay(
-      1000,
+      1000, // after passing the 1000 millisecond, it has to go back
       withRepeat(
         withTiming(-textWidth, {
           duration: 5000,
@@ -27,7 +27,10 @@ const MovingText = ({text, animationThreshold, style}) => {
         true, // should be reversed or not
       ),
     );
-  }, []);
+    return () => {
+      translateX.value = 0; // Stop the animation when the component unmounts or shouldAnimate becomes false
+    };
+  }, [translateX, text, animationThreshold, textWidth]);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
