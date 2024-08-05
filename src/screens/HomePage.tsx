@@ -1,6 +1,6 @@
 'use client';
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -9,10 +9,11 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
+  Animated
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {iconSize, spacing} from '../designs/dimensions';
+import { iconSize, spacing } from '../designs/dimensions';
 import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
 import NavBar from '../designs/NavBar';
@@ -107,22 +108,68 @@ import NavBar from '../designs/NavBar';
 
 // main function
 const HomePage = () => {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const menuAnimation = useRef(new Animated.Value(-200)).current;
+
+  const toggleMenu = () => {
+    const toValue = isMenuVisible ? -200 : 0;
+
+    Animated.timing(menuAnimation, {
+      toValue,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+
+    setIsMenuVisible(!isMenuVisible);
+  };
+
+  const handleLogOut = () => {
+    console.log('Logged out');
+    // Add your log out logic here
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        {/* Header */}
         <TouchableOpacity>
           <Feather name="bell" color={'white'} size={iconSize.lg} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={toggleMenu}>
           <FontAwesome5 name="grip-lines" color="white" size={iconSize.lg} />
         </TouchableOpacity>
       </View>
 
+      {/* Sidebar Menu */}
+      {isMenuVisible && (
+        <Animated.View
+          style={[
+            styles.menu,
+            { transform: [{ translateX: menuAnimation }] }
+          ]}
+        >
+          <View style={styles.menu}>
+          <TouchableOpacity onPress={toggleMenu}>
+          <FontAwesome5 name="grip-lines" color="white" size={iconSize.lg} />
+          </TouchableOpacity>
+            <View style={styles.menuContent}>
+              <Text style={styles.username}>Username</Text>
+              <TouchableOpacity style={styles.menuItem}>
+              <FontAwesome5 name="heart" color="#FFFFFF" size={20} />
+              <Text style={styles.menuItemText}>Liked Songs</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.logOutButton} onPress={handleLogOut}>
+              <FontAwesome5 name="sign-out-alt" color="#FFFFFF" size={20} />
+              <Text style={styles.logOutText}>Log Out</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Animated.View>
+      )}
+
       <FlatList
-        data={[1, 2, 3]}
+        data={[1, 2, 3]} 
         renderItem={SongCategories}
-        contentContainerStyle={{paddingBottom: 300}}
+        contentContainerStyle={{ paddingBottom: 300 }}
       />
       <FloatingPlayer />
       <NavBar />
@@ -137,11 +184,98 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#14121F',
     flex: 1,
+    position: 'relative', 
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: spacing.lg,
-    paddingHorizontal: spacing.md,
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+    position: 'relative', 
+  },
+   menu: {
+    position: 'absolute', 
+    top: 0,
+    right: 0,
+    width: 250,
+    height: '100%',
+    backgroundColor: '#2C2C2C',
+    borderTopLeftRadius: 16,
+    borderBottomLeftRadius: 16,
+    
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingBottom: 15,
+    shadowOffset: { width: -2, height: 0 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    zIndex: 1000, 
+    transform: [{ translateX: 0 }], 
+  },
+  menuContent: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  username: {
+    color: '#FFFFFF',
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 24,
+    textAlign: 'left', 
+    width: '100%', 
+    paddingLeft: 10, 
+    paddingTop: 10
+  },
+  menuItem: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginBottom: 12,
+    backgroundColor: '#3E3E3E',
+    elevation: 2,
+  },
+  menuItemText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    marginLeft: 16, 
+  },
+  logOutButton: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    backgroundColor: '#A32979',
+    elevation: 2,
+  },
+  logOutText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    marginLeft: 16, 
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 15,
+    left: 15, 
+    backgroundColor: '#3E3E3E',
+    borderRadius: 50,
+    padding: 10,
+    elevation: 5,
+  },
+  closeButtonText: {
+    color: '#FFFFFF',
+    fontSize: 20,
+  },
+  toggleButton: {
+    position: 'absolute',
+    left: -40, 
+    top: '50%',
+    transform: [{ translateY: -15 }], 
+    zIndex: 1100, 
   },
 });
