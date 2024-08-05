@@ -1,9 +1,9 @@
 // src/components/WelcomePage.js
-import React, { useEffect } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Image, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const WelcomePage = ({ navigation }) => {
+const WelcomePage = ({navigation}) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       // Ensure 'SignUp' matches the screen name in your navigator
@@ -17,8 +17,7 @@ const WelcomePage = ({ navigation }) => {
   return (
     <LinearGradient
       colors={['#171123', '#372248']} // Verify gradient colors
-      style={styles.container}
-    >
+      style={styles.container}>
       <Image
         source={require('../assets/images/welcome.png')} // Verify the image path
         style={styles.logo}
