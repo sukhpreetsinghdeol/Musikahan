@@ -15,6 +15,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {fontSize, iconSize, spacing} from '../designs/dimensions';
 import Songs from '../designs/songs';
 import SongCategories from '../designs/SongCategories';
+import FloatingPlayer from '../designs/FloatingPlayer';
 
 // const recentlyPlayed = [
 //   {id: 1, title: 'Song 1', artist: 'Artist 1'},
@@ -117,11 +118,13 @@ const HomePage = () => {
           <FontAwesome5 name="grip-lines" color="white" size={iconSize.lg} />
         </TouchableOpacity>
       </View>
+
       <FlatList
         data={[1, 2, 3]}
         renderItem={SongCategories}
         contentContainerStyle={{paddingBottom: 300}}
       />
+      <FloatingPlayer />
     </View>
   );
 };
