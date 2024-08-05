@@ -109,6 +109,7 @@ const HomePage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        {/* Header */}
         <TouchableOpacity>
           <Feather name="bell" color={'white'} size={iconSize.lg} />
         </TouchableOpacity>
