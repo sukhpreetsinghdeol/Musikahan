@@ -1,4 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {Image} from 'react-native';
 import {fontSize, iconSize, spacing} from './dimensions';
@@ -9,7 +15,7 @@ const imageURL =
 
 const FloatingPlayer = () => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.85}>
       <Image source={{uri: imageURL}} style={styles.coverImage} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>On & On (ft. Daniel Levi)</Text>
@@ -20,7 +26,7 @@ const FloatingPlayer = () => {
         <PlayPauseButton size={iconSize.lg} />
         <NextButton />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -32,8 +38,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   coverImage: {
-    height: 70,
-    width: 70,
+    height: 68,
+    width: 68,
   },
   titleContainer: {
     flex: 1,
@@ -51,5 +57,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 18,
+    paddingRight: spacing.sm,
   },
 });
