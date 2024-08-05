@@ -6,12 +6,16 @@ import {fontSize, spacing} from './dimensions';
 const imageUrl =
   'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/568/100x100/godslayer-1700528454-rTWxGyR4Bq.jpg';
 
-const Songs = () => {
+const Songs = ({containerStyle, imageStyle}) => {
   return (
-    <TouchableOpacity style={styles.containerHeader}>
-      <Image source={{uri: imageUrl}} style={styles.coverImage} />
-      <Text style={styles.songTitle}>Sold Dreams</Text>
-      <Text style={styles.songArtist}>1$K1</Text>
+    <TouchableOpacity style={[styles.containerHeader, containerStyle]}>
+      <Image source={{uri: imageUrl}} style={[styles.coverImage, imageStyle]} />
+      <Text style={styles.songTitle} numberOfLines={1}>
+        Sold Dreams
+      </Text>
+      <Text style={styles.songArtist} numberOfLines={1}>
+        1$K1
+      </Text>
     </TouchableOpacity>
   );
 };

@@ -15,6 +15,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {iconSize, spacing} from '../designs/dimensions';
 import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
+import NavBar from '../designs/NavBar';
 
 // const recentlyPlayed = [
 //   {id: 1, title: 'Song 1', artist: 'Artist 1'},
@@ -124,6 +125,7 @@ const HomePage = () => {
         contentContainerStyle={{paddingBottom: 300}}
       />
       <FloatingPlayer />
+      <NavBar />
     </View>
   );
 };
