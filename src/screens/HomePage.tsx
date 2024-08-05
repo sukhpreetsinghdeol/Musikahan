@@ -148,29 +148,27 @@ const HomePage = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Sidebar Menu */}
-      {isMenuVisible && (
+     {/* Sidebar Menu */}
+     {isMenuVisible && (
         <Animated.View
           style={[
             styles.menu,
             { transform: [{ translateX: menuAnimation }] }
           ]}
         >
-          <View style={styles.menu}>
-          <TouchableOpacity onPress={toggleMenu}>
-          <FontAwesome5 name="grip-lines" color="white" size={iconSize.lg} />
+          <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
+            <Text style={styles.closeButtonText}>×</Text>
           </TouchableOpacity>
-            <View style={styles.menuContent}>
-              <Text style={styles.username}>Username</Text>
-              <TouchableOpacity style={styles.menuItem} onPress={handleLikedSongs}>
+          <View style={styles.menuContent}>
+            <Text style={styles.username}>Username</Text>
+            <TouchableOpacity style={styles.menuItem} onPress={handleLikedSongs}>
               <FontAwesome5 name="heart" color="#FFFFFF" size={20} />
-              <Text style={styles.menuItemText} >Liked Songs</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.logOutButton} onPress={handleLogOut}>
+              <Text style={styles.menuItemText}>Liked Songs</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.logOutButton} onPress={handleLogOut}>
               <FontAwesome5 name="sign-out-alt" color="#FFFFFF" size={20} />
               <Text style={styles.logOutText}>Log Out</Text>
-              </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           </View>
         </Animated.View>
       )}
@@ -191,19 +189,22 @@ export default HomePage;
 // CSS Styles
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#14121F',
     flex: 1,
-    position: 'relative', 
+    backgroundColor: '#14121F',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 20,
     paddingHorizontal: 16,
-    position: 'relative', 
   },
-   menu: {
-    position: 'absolute', 
+  headingText: {
+    fontSize: 23,
+    color: 'white',
+    textAlign: 'center',
+  },
+  menu: {
+    position: 'absolute',
     top: 0,
     right: 0,
     width: 250,
@@ -211,30 +212,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#2C2C2C',
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,
-    
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingBottom: 15,
+    padding: 15,
     shadowOffset: { width: -2, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 10,
-    zIndex: 1000, 
-    transform: [{ translateX: 0 }], 
+    zIndex: 1000,
   },
   menuContent: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingTop: 50,
   },
   username: {
     color: '#FFFFFF',
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 24,
-    textAlign: 'left', 
-    width: '100%', 
-    paddingLeft: 10, 
-    paddingTop: 10
+    textAlign: 'center',
   },
   menuItem: {
     width: '100%',
@@ -250,7 +245,7 @@ const styles = StyleSheet.create({
   menuItemText: {
     color: '#FFFFFF',
     fontSize: 18,
-    marginLeft: 16, 
+    marginLeft: 16,
   },
   logOutButton: {
     width: '100%',
@@ -265,12 +260,12 @@ const styles = StyleSheet.create({
   logOutText: {
     color: '#FFFFFF',
     fontSize: 18,
-    marginLeft: 16, 
+    marginLeft: 16,
   },
   closeButton: {
     position: 'absolute',
     top: 15,
-    left: 15, 
+    left: 15,
     backgroundColor: '#3E3E3E',
     borderRadius: 50,
     padding: 10,
@@ -279,12 +274,5 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: '#FFFFFF',
     fontSize: 20,
-  },
-  toggleButton: {
-    position: 'absolute',
-    left: -40, 
-    top: '50%',
-    transform: [{ translateY: -15 }], 
-    zIndex: 1100, 
   },
 });
