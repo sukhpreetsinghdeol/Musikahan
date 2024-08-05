@@ -9,6 +9,7 @@ import WelcomePage from './src/screens/WelcomePage';
 import SearchScreen from './src/screens/SearchScreen';
 import LikeScreen from './src/screens/LikeScreen';
 import PlayerScreen from './src/screens/PlayerScreen';
+import LibraryPage from './src/screens/LibraryPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ function App(): React.JSX.Element {
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="LikeScreen" component={LikeScreen} />
           <Stack.Screen name="PlayerScreen" component={PlayerScreen} />
+          <Stack.Screen name="Library" component={LibraryPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
