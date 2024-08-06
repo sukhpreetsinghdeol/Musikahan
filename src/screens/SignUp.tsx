@@ -132,7 +132,7 @@ const App = () => {
             <TouchableOpacity className="bg-[#C5A1FF] rounded-lg p-4 items-center mb-5"onPress={handleSignUp}>
               <Text className="text-purple-900 text-lg font-bold">Sign Up</Text>
             </TouchableOpacity>
-            <Text className="text-white text-center mb-2">
+            <Text className="text-white text-center mb-2 mt-10">
               Already a member?{' '}
               <Text
                 className="text-blue-500"
