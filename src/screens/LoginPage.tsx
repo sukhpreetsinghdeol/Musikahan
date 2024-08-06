@@ -68,12 +68,13 @@ const LoginPage: React.FC<LoginPageProps> = ({ isVisible, onClose }) => {
             Alert.alert('Error', 'Invalid email format. Please enter a valid email.');
             break;
           default:
+            //if the error code is not handled specifically
             Alert.alert('Error', 'An error occurred. Please try again.');
             break;
         }
       } else {
-        // Handle unexpected errors
-        Alert.alert('Error', 'An unexpected error occurred.');
+        // if the error is not a FirebaseError
+        Alert.alert('Error', 'An unexpected error occurred. Please check your password or sign-up first.');
       }
     }
   };
