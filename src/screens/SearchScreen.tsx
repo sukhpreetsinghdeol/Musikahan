@@ -1,3 +1,5 @@
+// SearchScreen.js
+
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -72,8 +74,9 @@ const SearchScreen = () => {
         renderItem={renderItem}
         keyExtractor={item => item.url} // Use unique URL for key extraction
       />
-       <FloatingPlayer />
-       <NavBar />
+    
+      <FloatingPlayer />
+      <NavBar />
     </View>
   );
 };
