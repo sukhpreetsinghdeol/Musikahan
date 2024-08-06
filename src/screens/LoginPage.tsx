@@ -52,9 +52,12 @@ const LoginPage: React.FC<LoginPageProps> = ({ isVisible, onClose }) => {
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const username = user.email; // or another method to get username
+
       onClose(); // Close the modal
-      navigation.navigate('Home'); // Navigate to HomePage
+      navigation.navigate('Home', { username }); // Pass username as parameter
     } catch (error) {
       if (error instanceof FirebaseError) {
         switch (error.code) {
@@ -68,12 +71,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ isVisible, onClose }) => {
             Alert.alert('Error', 'Invalid email format. Please enter a valid email.');
             break;
           default:
-            //if the error code is not handled specifically
             Alert.alert('Error', 'An error occurred. Please try again.');
             break;
         }
       } else {
-        // if the error is not a FirebaseError
         Alert.alert('Error', 'An unexpected error occurred. Please check your password or sign-up first.');
       }
     }

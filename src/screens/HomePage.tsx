@@ -1,6 +1,6 @@
 'use client';
-import {useNavigation} from '@react-navigation/native';
-import React, {useState, useRef} from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -11,16 +11,18 @@ import {
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {iconSize, spacing} from '../designs/dimensions';
+import { iconSize, spacing } from '../designs/dimensions';
 import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
 import NavBar from '../designs/NavBar';
-import {SongsWithCategory} from '../data/SongsWithCategory';
+import { SongsWithCategory } from '../data/SongsWithCategory';
 
 const HomePage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuAnimation = useRef(new Animated.Value(-200)).current;
   const navigation = useNavigation<any>();
+  const route = useRoute<any>(); // Access route parameters
+  const { username } = route.params || {}; // Get username from route parameters
 
   const toggleMenu = () => {
     const toValue = isMenuVisible ? -200 : 0;
@@ -38,7 +40,11 @@ const HomePage = () => {
     navigation.navigate('SignUp');
   };
 
-
+  const handleLikedSongs = () => {
+    console.log('Liked Songs');
+    // Navigate to LikeScreen
+    navigation.navigate('LikeScreen');
+  };
 
   return (
     <View style={styles.container}>
@@ -60,12 +66,17 @@ const HomePage = () => {
       {/* Sidebar Menu */}
       {isMenuVisible && (
         <Animated.View
-          style={[styles.menu, {transform: [{translateX: menuAnimation}]}]}>
+          style={[styles.menu, { transform: [{ translateX: menuAnimation }] }]}>
           <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
             <Text style={styles.closeButtonText}>×</Text>
           </TouchableOpacity>
           <View style={styles.menuContent}>
-            <Text style={styles.username}>Username</Text>
+            {username ? (
+              <Text style={styles.username}>Welcome, {username}</Text>
+            ) : (
+              <Text style={styles.username}>User</Text>
+            )}
+         
             <TouchableOpacity
               style={styles.logOutButton}
               onPress={handleLogOut}>
@@ -78,8 +89,8 @@ const HomePage = () => {
 
       <FlatList
         data={SongsWithCategory}
-        renderItem={({item}) => <SongCategories item={item} />}
-        contentContainerStyle={{paddingBottom: 300}}
+        renderItem={({ item }) => <SongCategories item={item} />}
+        contentContainerStyle={{ paddingBottom: 300 }}
       />
       <FloatingPlayer />
       <NavBar />
@@ -118,7 +129,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,
     padding: 15,
-    shadowOffset: {width: -2, height: 0},
+    shadowOffset: { width: -2, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 10,
     zIndex: 1000,
@@ -132,9 +143,10 @@ const styles = StyleSheet.create({
   username: {
     color: '#FFFFFF',
     fontSize: 22,
-    fontWeight: 'bold',
     marginBottom: 24,
-    textAlign: 'center',
+    marginTop: 20,
+    textAlign: 'left', // Align text to the left
+    width: '100%', // Ensure it takes up the full width
   },
   menuItem: {
     width: '100%',
