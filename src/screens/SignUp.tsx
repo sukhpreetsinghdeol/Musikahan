@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import LoginPage from './LoginPage';
@@ -50,6 +51,7 @@ const App = () => {
         // Signed up successfully
         const user = userCredential.user;
         console.log('User signed up:', user);
+        Alert.alert('Success', 'You have signed up successfully!'); // Show success message
         // You can add additional logic here, like saving user info to Firestore
       })
       .catch((error) => {
