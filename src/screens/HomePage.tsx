@@ -1,11 +1,9 @@
 'use client';
-import { useNavigation } from '@react-navigation/native';
-import React, { useState, useRef } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useState, useRef} from 'react';
 import {
   View,
   Text,
-  Image,
-  ScrollView,
   TouchableOpacity,
   StyleSheet,
   FlatList,
@@ -13,11 +11,11 @@ import {
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { iconSize, spacing } from '../designs/dimensions';
+import {iconSize, spacing} from '../designs/dimensions';
 import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
 import NavBar from '../designs/NavBar';
-import { SongsWithCategory } from '../data/SongsWithCategory';
+import {SongsWithCategory} from '../data/SongsWithCategory';
 
 const HomePage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -66,8 +64,7 @@ const HomePage = () => {
       {/* Sidebar Menu */}
       {isMenuVisible && (
         <Animated.View
-          style={[styles.menu, { transform: [{ translateX: menuAnimation }] }]}
-        >
+          style={[styles.menu, {transform: [{translateX: menuAnimation}]}]}>
           <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
             <Text style={styles.closeButtonText}>×</Text>
           </TouchableOpacity>
@@ -75,15 +72,13 @@ const HomePage = () => {
             <Text style={styles.username}>Username</Text>
             <TouchableOpacity
               style={styles.menuItem}
-              onPress={handleLikedSongs}
-            >
+              onPress={handleLikedSongs}>
               <FontAwesome5 name="heart" color="#FFFFFF" size={20} />
               <Text style={styles.menuItemText}>Liked Songs</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.logOutButton}
-              onPress={handleLogOut}
-            >
+              onPress={handleLogOut}>
               <FontAwesome5 name="sign-out-alt" color="#FFFFFF" size={20} />
               <Text style={styles.logOutText}>Log Out</Text>
             </TouchableOpacity>
@@ -93,8 +88,8 @@ const HomePage = () => {
 
       <FlatList
         data={SongsWithCategory}
-        renderItem={SongCategories}
-        contentContainerStyle={{ paddingBottom: 300 }}
+        renderItem={({item}) => <SongCategories item={item} />}
+        contentContainerStyle={{paddingBottom: 300}}
       />
       <FloatingPlayer />
       <NavBar />
@@ -133,7 +128,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,
     padding: 15,
-    shadowOffset: { width: -2, height: 0 },
+    shadowOffset: {width: -2, height: 0},
     shadowOpacity: 0.2,
     shadowRadius: 10,
     zIndex: 1000,

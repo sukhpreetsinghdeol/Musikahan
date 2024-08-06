@@ -1,13 +1,15 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {fontSize, spacing} from './dimensions';
-import TrackPlayer from 'react-native-track-player';
+import {SongsWithCategory} from '../data/SongsWithCategory';
+import {useNavigation} from '@react-navigation/native';
 
 const Songs = ({item, containerStyle, imageStyle, handlePlay}) => {
+  const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={[styles.containerHeader, containerStyle]}
-      onPress={() => handlePlay(item)}>
+      onPress={() => navigation.navigate('PlayerScreen', {item: item})}>
       <Image source={item.artwork} style={[styles.coverImage, imageStyle]} />
       <Text style={styles.songTitle} numberOfLines={1}>
         {item.title}
