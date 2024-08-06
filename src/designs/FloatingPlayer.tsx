@@ -16,11 +16,14 @@ const imageURL =
 
 const FloatingPlayer = () => {
   const navigation = useNavigation();
+
+  // Define shared values for the slider
   const progress = useSharedValue(0.2);
   const min = useSharedValue(0);
   const max = useSharedValue(1);
   const isSliding = useSharedValue(false);
 
+  // Get the active track and progress from the custom hooks
   const activeTrack = useActiveTrack();
   const {duration, position} = useProgress();
 
@@ -64,14 +67,14 @@ const FloatingPlayer = () => {
         style={styles.container}
         activeOpacity={0.85}
         onPress={handleOpenPlayerScreen}>
-        <Image source={{uri: imageURL}} style={styles.coverImage} />
+        <Image source={{uri: activeTrack.artwork}} style={styles.coverImage} />
         <View style={styles.titleContainer}>
           <MovingText
             animationThreshold={15}
             style={styles.title}
-            text={'On & On (ft. Daniel Levi)'}
+            text={activeTrack.title}
           />
-          <Text style={styles.artist}>Cartoon, Daniel Levi, Jéja</Text>
+          <Text style={styles.artist}>{activeTrack.artist}</Text>
         </View>
         <View style={styles.playerControlPlayer}>
           <PreviousButton />
