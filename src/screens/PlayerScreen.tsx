@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {iconSize, fontSize, spacing} from '../designs/dimensions';
 import ProgressBar from '../designs/ProgressBar';
@@ -10,6 +10,8 @@ import {
 } from '../designs/PlayerControls';
 import {useNavigation} from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import TrackPlayer, { useActiveTrack } from "react-native-track-player";
+
 
 const imageURL =
   'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/725/325x325/1721817328_whh1S1CyIp_artwork.jpg';
@@ -18,6 +20,8 @@ const PlayerScreen = () => {
   const navigation = useNavigation();
   const isLiked = true;
   //const navigation = useNavigation();
+  const activeTrack = useActiveTrack();
+  const [isMute, setIsMute] = useState(false);
 
   return (
     <View style={styles.container}>

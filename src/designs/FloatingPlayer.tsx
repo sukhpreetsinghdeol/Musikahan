@@ -1,13 +1,12 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import React from 'react';
-import {Image} from 'react-native';
-import {fontSize, iconSize, spacing} from './dimensions';
-import {NextButton, PlayPauseButton, PreviousButton} from './PlayerControls';
-import {useSharedValue} from 'react-native-reanimated';
-import {Slider} from 'react-native-awesome-slider';
+import { useSharedValue } from 'react-native-reanimated';
+import { Slider } from 'react-native-awesome-slider';
 import MovingText from './MovingText';
-import {useNavigation} from '@react-navigation/native';
-import TrackPlayer from 'react-native-track-player';
+import { useNavigation } from '@react-navigation/native';
+import TrackPlayer, { useActiveTrack, useProgress } from 'react-native-track-player';
+import { NextButton, PlayPauseButton, PreviousButton } from './PlayerControls';
+import { fontSize, iconSize, spacing } from './dimensions';
 
 const imageURL =
   'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/152/325x325/1705340894_JZ2NifV4gB_2024---CARTOON-JEYJA---On--On-ft.-Daniel-Levi.jpg';
@@ -17,22 +16,33 @@ const FloatingPlayer = () => {
   const progress = useSharedValue(0.2);
   const min = useSharedValue(0);
   const max = useSharedValue(1);
+  const isSliding = useSharedValue(false);
+
+  const activeTrack = useActiveTrack();
+  const { duration, position } = useProgress();
+
+  if (!isSliding.value) {
+    progress.value = duration > 0 ? position / duration : 0;
+  }
+
   const handleOpenPlayerScreen = () => {
     navigation.navigate('PlayerScreen');
   };
+
+  if (!activeTrack) {
+    return null;
+  }
+
   return (
     <View>
-      <View
-        style={{
-          zIndex: 1,
-        }}>
+      <View style={styles.sliderContainer}>
         <Slider
-          style={styles.container}
+          style={styles.slider}
           progress={progress}
           minimumValue={min}
           maximumValue={max}
           thumbWidth={10}
-          containerStyle={{}}
+          containerStyle={styles.sliderTrack}
           renderBubble={() => null}
           onSlidingStart={() => (isSliding.value = true)}
           onValueChange={async value => {
@@ -43,22 +53,23 @@ const FloatingPlayer = () => {
               return;
             }
             isSliding.value = false;
+            await TrackPlayer.seekTo(value * duration);
           }}
         />
       </View>
       <TouchableOpacity
         style={styles.container}
         activeOpacity={0.85}
-        onPress={handleOpenPlayerScreen}>
-        <Image source={{uri: imageURL}} style={styles.coverImage} />
+        onPress={handleOpenPlayerScreen}
+      >
+        <Image source={{ uri: imageURL }} style={styles.coverImage} />
         <View style={styles.titleContainer}>
           <MovingText
             animationThreshold={15}
             style={styles.title}
             text={'On & On (ft. Daniel Levi)'}
           />
-          {/* <Text style={styles.title}>On & On (ft. Daniel Levi)</Text> */}
-          <Text style={styles.artist}>Cartoon, Daniel Levi, Jéja </Text>
+          <Text style={styles.artist}>Cartoon, Daniel Levi, Jéja</Text>
         </View>
         <View style={styles.playerControlPlayer}>
           <PreviousButton />
@@ -73,6 +84,15 @@ const FloatingPlayer = () => {
 export default FloatingPlayer;
 
 const styles = StyleSheet.create({
+  sliderContainer: {
+    zIndex: 1,
+  },
+  slider: {
+    flex: 1,
+  },
+  sliderTrack: {
+    width: '100%',
+  },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
