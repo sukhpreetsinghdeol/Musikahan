@@ -22,9 +22,7 @@ function App(): React.JSX.Element {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{headerShown: false}}
-          initialRouteName="Home">
+        <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Welcome" component={WelcomePage} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Login" component={LoginPage} />

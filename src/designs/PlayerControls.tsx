@@ -3,7 +3,7 @@ import {TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {iconSize} from './dimensions';
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, {useIsPlaying} from 'react-native-track-player';
 
 export const PreviousButton = ({size = iconSize.lg}) => {
   const handleGoToPrevious = async () => {
