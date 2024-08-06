@@ -46,3 +46,11 @@ export const NextButton = ({size = iconSize.lg}) => {
     </TouchableOpacity>
   );
 };
+
+export const stopMusicPlayer = async () => {
+  try {
+    await TrackPlayer.stop();
+  } catch (error) {
+    console.error('Error stopping the music player:', error);
+  }
+};

@@ -1,6 +1,6 @@
 // src/components/WelcomePage.js
 import React, {useEffect} from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, Text, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const WelcomePage = ({navigation}) => {
@@ -22,6 +22,9 @@ const WelcomePage = ({navigation}) => {
         source={require('../assets/images/welcome.png')} // Verify the image path
         style={styles.logo}
       />
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>Created by Crackhead Coders</Text>
+      </View>
     </LinearGradient>
   );
 };
@@ -29,6 +32,8 @@ const WelcomePage = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center', // Center content vertically
+    alignItems: 'center', // Center content horizontally
   },
   logo: {
     flex: 1,
@@ -36,6 +41,21 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover', // Ensures the image covers the screen while maintaining aspect ratio
   },
+  footer: {
+    position: 'absolute',
+    bottom: 40, // Adjust the distance from the bottom
+    width: '100%',
+    alignItems: 'center',
+  },
+  footerText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+    fontFamily: 'Poppins',
+    fontStyle: 'italic',
+  },
+
+
 });
 
 export default WelcomePage;

@@ -85,70 +85,118 @@ const LoginPage: React.FC<LoginPageProps> = ({ isVisible, onClose }) => {
       animationType="slide"
       transparent={true}
       visible={isVisible}
-      onRequestClose={onClose}>
+      onRequestClose={onClose}
+    >
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{flex: 1}}>
-        <ScrollView
-          contentContainerStyle={{flexGrow: 1, justifyContent: 'flex-end'}}
-          keyboardShouldPersistTaps="handled">
-          <LinearGradient
-            colors={['#171123', '#372248']} // Background gradient colors
-            style={{flex: 1, justifyContent: 'flex-end'}}>
+        style={{ flex: 1 }}
+      >
+        <LinearGradient
+          colors={['#171123', '#372248']}
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}
+            keyboardShouldPersistTaps="handled"
+          >
             <LinearGradient
-              colors={['#AB4FE4', '#FF8B8B']} // Modal gradient colors
+              colors={['#AB4FE4', '#FF8B8B']}
               style={{
-                borderTopLeftRadius: 15,
-                borderTopRightRadius: 15,
+                borderRadius: 15,
                 padding: 16,
-                backgroundColor: 'transparent', // Ensure background is transparent for gradient visibility
-              }}>
-              <View className="bg-opacity-80 rounded-t-lg p-6">
-                <TouchableOpacity className="self-end" onPress={onClose}>
-                  <Text className="text-white text-lg">×</Text>
+                width: '90%',
+                maxWidth: 400,
+                alignItems: 'center',
+              }}
+            >
+              <View style={{ width: '100%' }}>
+                <TouchableOpacity
+                  style={{ alignSelf: 'flex-end' }}
+                  onPress={onClose}
+                >
+                  <Text style={{ fontSize: 24, color: 'white' }}>×</Text>
                 </TouchableOpacity>
-                <Text className="text-2xl font-bold mb-4 text-center text-white">
-                  Welcome Back!
+                <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16, textAlign: 'center', color: 'white' }}>
+                  Welcome to Musikahan!
                 </Text>
                 <TextInput
-                  className="border-purple-900 border-2 rounded-lg p-4 mb-5 text-white"
+                  style={{
+                    borderColor: '#57347A',
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    padding: 12,
+                    marginBottom: 16,
+                    marginTop: 50,
+                    color: 'white',
+                    width: '100%',
+                  }}
                   placeholder="Username/Email"
                   placeholderTextColor="white"
                   value={email}
                   onChangeText={setEmail}
                 />
                 <TextInput
-                  className="border-purple-900 border-2 rounded-lg p-4 mb-5 text-white"
+                  style={{
+                    borderColor: '#57347A',
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    padding: 12,
+                    marginBottom: 16,
+                    color: 'white',
+                    width: '100%',
+                  }}
                   placeholder="Password"
-                  secureTextEntry={true}
+                  secureTextEntry
                   placeholderTextColor="white"
                   value={password}
                   onChangeText={setPassword}
                 />
-                <View className="flex-row justify-between mb-5">
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginBottom: 16 }}>
                   <TouchableOpacity onPress={handleForgotPassword}>
-                    <Text className="text-white">Forgot Password?</Text>
+                    <Text style={{ color: 'white' }}>Forgot Password?</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={handleForgotUsername}>
-                    <Text className="text-white">Forgot Username?</Text>
+                    <Text style={{ color: 'white' }}>Forgot Username?</Text>
                   </TouchableOpacity>
                 </View>
                 <TouchableOpacity
-                  className="bg-[#A32979] rounded-lg p-4 mb-5 items-center"
-                  onPress={handleLogin}>
-                  <Text className="text-gray-200 text-lg font-bold">Login</Text>
+                  style={{
+                    backgroundColor: '#A32979',
+                    borderRadius: 8,
+                    padding: 12,
+                    alignItems: 'center',
+                    marginBottom: 16,
+                    width: '100%',
+                    marginTop: 30
+                  }}
+                  onPress={handleLogin}
+                >
+                  <Text style={{ color: 'white', fontWeight: 'bold' }}>Login</Text>
                 </TouchableOpacity>
                 {errorMessage ? (
+<<<<<<< HEAD
                 <Text className="text-red-500 text-center">{errorMessage}</Text>
               ) : null}
                 
+=======
+                  <Text style={{ color: 'red', textAlign: 'center' }}>{errorMessage}</Text>
+                ) : null}
+                <Text style={{ color: 'white', textAlign: 'center', marginTop: 20 }}>
+                  New user?{' '}
+                  <Text
+                    style={{ color: 'blue', textDecorationLine: 'underline' }}
+                    onPress={() => navigation.navigate('SignUp')} // Navigate to SignUpPage
+                  >
+                    Create an account.
+                  </Text>
+                </Text>
+>>>>>>> Magdalena
               </View>
             </LinearGradient>
-          </LinearGradient>
-        </ScrollView>
+          </ScrollView>
+        </LinearGradient>
       </KeyboardAvoidingView>
     </Modal>
   );
 };
-
 export default LoginPage;

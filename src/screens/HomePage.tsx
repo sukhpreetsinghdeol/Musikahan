@@ -16,6 +16,10 @@ import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
 import NavBar from '../designs/NavBar';
 import { SongsWithCategory } from '../data/SongsWithCategory';
+<<<<<<< HEAD
+=======
+import { stopMusicPlayer } from '../designs/PlayerControls';
+>>>>>>> Magdalena
 
 const HomePage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -34,10 +38,11 @@ const HomePage = () => {
     setIsMenuVisible(!isMenuVisible);
   };
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     console.log('Logged out');
     // Navigate to LoginPage
-    navigation.navigate('SignUp');
+    await stopMusicPlayer();
+    navigation.navigate('Login');
   };
 
   const handleLikedSongs = () => {

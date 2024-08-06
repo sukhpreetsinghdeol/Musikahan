@@ -14,6 +14,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import LoginPage from './LoginPage';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebaseConfig';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 // Email validation function
 const validateEmail = (email:string): boolean => {
@@ -28,6 +29,7 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const navigation = useNavigation(); // Initialize navigation
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!isPasswordVisible);
@@ -53,6 +55,8 @@ const App = () => {
         console.log('User signed up:', user);
         Alert.alert('Success', 'You have signed up successfully!'); // Show success message
         // You can add additional logic here, like saving user info to Firestore
+        navigation.navigate('Home'); // Navigate to HomePage
+        
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -128,7 +132,7 @@ const App = () => {
             <TouchableOpacity className="bg-[#C5A1FF] rounded-lg p-4 items-center mb-5"onPress={handleSignUp}>
               <Text className="text-purple-900 text-lg font-bold">Sign Up</Text>
             </TouchableOpacity>
-            <Text className="text-white text-center mb-2">
+            <Text className="text-white text-center mb-2 mt-10">
               Already a member?{' '}
               <Text
                 className="text-blue-500"
@@ -136,7 +140,26 @@ const App = () => {
                 Login
               </Text>
             </Text>
-           
+            <Text className="text-white text-center mb-2">or</Text>
+            <TouchableOpacity className="flex-row bg-[#C5A1FF] rounded-lg p-4 items-center justify-center mb-5">
+              <Image
+                source={require('../assets/images/facebook-icon.png')}
+                className="w-6 h-6 mr-2"
+              />
+              <Text className="text-purple-900 text-lg ml-2">
+                Signup with Facebook
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity className="flex-row border-purple-300 border-2 rounded-lg p-4 items-center justify-center mb-2">
+              <Image
+                source={require('../assets/images/google-icon.png')}
+                className="w-6 h-6 mr-2"
+              />
+              <Text className="text-white text-lg ml-2">
+                Signup with Google
+              </Text>
+            </TouchableOpacity>
+
             <LoginPage
               isVisible={isLoginVisible}
               onClose={() => setLoginVisible(false)}
