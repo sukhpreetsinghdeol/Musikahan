@@ -1,6 +1,4 @@
-// SearchScreen.js
-
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,50 +9,59 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native'; // Import navigation hook
+import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { recommendedSongs } from '../data/songs'; 
+import FloatingPlayer from '../designs/FloatingPlayer';
+import NavBar from '../designs/NavBar';
 
-const songsData = [
-  {id: '1', title: 'Blinding Lights', artist: 'The Weeknd'},
-  {id: '2', title: 'Watermelon Sugar', artist: 'Harry Styles'},
-  {id: '3', title: 'Levitating', artist: 'Dua Lipa'},
-  {id: '4', title: 'Save Your Tears', artist: 'The Weeknd'},
-  {id: '5', title: 'Peaches', artist: 'Justin Bieber'},
-  {id: '6', title: 'Midnight City', artist: 'M83'},
-  {id: '7', title: 'Good 4 U', artist: 'Olivia Rodrigo'},
-  {id: '8', title: 'Kiss Me More', artist: 'Doja Cat'},
-  {id: '9', title: 'Industry Baby', artist: 'Lil Nas X'},
-  {id: '10', title: 'Montero (Call Me By Your Name)', artist: 'Lil Nas X'},
-];
+const { width } = Dimensions.get('window');
 
-const {width, height} = Dimensions.get('window');
 const SearchScreen = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredSongs, setFilteredSongs] = useState([]);
-  const navigation = useNavigation(); // Use navigation hook
+  const [filteredSongs, setFilteredSongs] = useState(recommendedSongs);
+  const navigation = useNavigation(); 
+
+  useEffect(() => {
+    
+    const results = recommendedSongs.filter(
+      song =>
+        song.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        song.artist.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredSongs(results);
+  }, [searchTerm]);
 
   const handleSearch = text => {
     setSearchTerm(text);
-    const results = songsData.filter(
-      song =>
-        song.title.toLowerCase().includes(text.toLowerCase()) ||
-        song.artist.toLowerCase().includes(text.toLowerCase()),
-    );
-    setFilteredSongs(results);
   };
 
-  const renderItem = ({item}) => (
-    <View className="p-3 border-b border-gray-700 rounded-lg bg-gray-800 mb-2">
-      <Text className="text-lg font-semibold text-white">{item.title}</Text>
-      <Text className="text-sm text-gray-400">{item.artist}</Text>
-    </View>
+  const handlePress = song => {
+    navigation.navigate('PlayerScreen', { song }); 
+  };
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.itemContainer}
+      onPress={() => handlePress(item)}
+    >
+      <Image
+        source={{ uri: item.artwork }}
+        style={styles.artwork}
+        resizeMode="cover"
+      />
+      <View style={styles.infoContainer}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.artist}>{item.artist}</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   return (
-    <View className="flex-1 bg-gray-900 p-4">
+    <View style={styles.container}>
       <TextInput
-        className="bg-gray-800 text-white rounded-lg p-3 mb-4"
+        style={styles.searchInput}
         placeholder="Search for songs or artists..."
         placeholderTextColor="#B0B0B0"
         value={searchTerm}
@@ -63,41 +70,67 @@ const SearchScreen = () => {
       <FlatList
         data={filteredSongs}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.url} // Use unique URL for key extraction
       />
-      <View style={styles.bottomContainer}>
-        <View style={styles.bottomIconWrapper}>
-          <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-            <Ionicons name="search-outline" size={35} color="#AB4DBA" />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Ionicons name="home-outline" size={35} color="#AB4DBA" />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigation.navigate('Library')}>
-            <MaterialIcons name="library-music" size={35} color="#AB4DBA" />
-          </TouchableOpacity>
-        </View>
-      </View>
+       <FloatingPlayer />
+       <NavBar />
     </View>
   );
 };
 
-export default SearchScreen;
-
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1e1e1e',
+  },
+  searchInput: {
+    backgroundColor: '#333',
+    color: '#fff',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#333',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 8,
+  },
+  artwork: {
+    width: 80,
+    height: 80,
+    borderRadius: 8,
+    marginRight: 16,
+  },
+  infoContainer: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  artist: {
+    fontSize: 14,
+    color: '#bbb',
+  },
   bottomContainer: {
     width: width,
     alignItems: 'center',
     paddingVertical: 15,
     borderTopColor: '#393E46',
     borderWidth: 1,
+    backgroundColor: '#1e1e1e',
   },
-
   bottomIconWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     width: '60%',
   },
 });
+
+export default SearchScreen;
+
+

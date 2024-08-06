@@ -38,11 +38,7 @@ const HomePage = () => {
     navigation.navigate('SignUp');
   };
 
-  const handleLikedSongs = () => {
-    console.log('Liked Songs');
-    // Navigate to LikeScreen
-    navigation.navigate('LikeScreen');
-  };
+
 
   return (
     <View style={styles.container}>
@@ -70,12 +66,6 @@ const HomePage = () => {
           </TouchableOpacity>
           <View style={styles.menuContent}>
             <Text style={styles.username}>Username</Text>
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={handleLikedSongs}>
-              <FontAwesome5 name="heart" color="#FFFFFF" size={20} />
-              <Text style={styles.menuItemText}>Liked Songs</Text>
-            </TouchableOpacity>
             <TouchableOpacity
               style={styles.logOutButton}
               onPress={handleLogOut}>
