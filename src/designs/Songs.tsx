@@ -1,20 +1,27 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {fontSize, spacing} from './dimensions';
-import TrackPlayer from 'react-native-track-player';
+import {useNavigation} from '@react-navigation/native';
+import MovingText from './MovingText';
 
 const Songs = ({item, containerStyle, imageStyle, handlePlay}) => {
+  const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={[styles.containerHeader, containerStyle]}
       onPress={() => handlePlay(item)}>
-      <Image source={item.artwork} style={[styles.coverImage, imageStyle]} />
-      <Text style={styles.songTitle} numberOfLines={1}>
-        {item.title}
-      </Text>
-      <Text style={styles.songArtist} numberOfLines={1}>
-        {item.artist}
-      </Text>
+      <Image
+        source={{uri: item.artwork}}
+        style={[styles.coverImage, imageStyle]}
+      />
+      <View>
+        <Text style={styles.songTitle} numberOfLines={1}>
+          {item.title}
+        </Text>
+        <Text style={styles.songArtist} numberOfLines={1}>
+          {item.artist}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };

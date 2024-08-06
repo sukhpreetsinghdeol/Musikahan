@@ -1,11 +1,9 @@
 'use client';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
-  Image,
-  ScrollView,
   TouchableOpacity,
   StyleSheet,
   FlatList,
@@ -18,11 +16,14 @@ import SongCategories from '../designs/SongCategories';
 import FloatingPlayer from '../designs/FloatingPlayer';
 import NavBar from '../designs/NavBar';
 import { SongsWithCategory } from '../data/SongsWithCategory';
+import { stopMusicPlayer } from '../designs/PlayerControls';
 
 const HomePage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuAnimation = useRef(new Animated.Value(-200)).current;
   const navigation = useNavigation<any>();
+  const route = useRoute<any>(); // Access route parameters
+  const { username } = route.params || {}; // Get username from route parameters
 
   const toggleMenu = () => {
     const toValue = isMenuVisible ? -200 : 0;
@@ -34,10 +35,11 @@ const HomePage = () => {
     setIsMenuVisible(!isMenuVisible);
   };
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     console.log('Logged out');
     // Navigate to LoginPage
-    navigation.navigate('SignUp');
+    await stopMusicPlayer();
+    navigation.navigate('Login');
   };
 
   const handleLikedSongs = () => {
@@ -66,24 +68,20 @@ const HomePage = () => {
       {/* Sidebar Menu */}
       {isMenuVisible && (
         <Animated.View
-          style={[styles.menu, { transform: [{ translateX: menuAnimation }] }]}
-        >
+          style={[styles.menu, { transform: [{ translateX: menuAnimation }] }]}>
           <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
             <Text style={styles.closeButtonText}>×</Text>
           </TouchableOpacity>
           <View style={styles.menuContent}>
-            <Text style={styles.username}>Username</Text>
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={handleLikedSongs}
-            >
-              <FontAwesome5 name="heart" color="#FFFFFF" size={20} />
-              <Text style={styles.menuItemText}>Liked Songs</Text>
-            </TouchableOpacity>
+            {username ? (
+              <Text style={styles.username}>Welcome, {username}</Text>
+            ) : (
+              <Text style={styles.username}>User</Text>
+            )}
+         
             <TouchableOpacity
               style={styles.logOutButton}
-              onPress={handleLogOut}
-            >
+              onPress={handleLogOut}>
               <FontAwesome5 name="sign-out-alt" color="#FFFFFF" size={20} />
               <Text style={styles.logOutText}>Log Out</Text>
             </TouchableOpacity>
@@ -93,7 +91,7 @@ const HomePage = () => {
 
       <FlatList
         data={SongsWithCategory}
-        renderItem={SongCategories}
+        renderItem={({ item }) => <SongCategories item={item} />}
         contentContainerStyle={{ paddingBottom: 300 }}
       />
       <FloatingPlayer />
@@ -147,9 +145,10 @@ const styles = StyleSheet.create({
   username: {
     color: '#FFFFFF',
     fontSize: 22,
-    fontWeight: 'bold',
     marginBottom: 24,
-    textAlign: 'center',
+    marginTop: 20,
+    textAlign: 'left', // Align text to the left
+    width: '100%', // Ensure it takes up the full width
   },
   menuItem: {
     width: '100%',

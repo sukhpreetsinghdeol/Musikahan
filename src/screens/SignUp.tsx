@@ -8,11 +8,13 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import LoginPage from './LoginPage';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebaseConfig';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 // Email validation function
 const validateEmail = (email:string): boolean => {
@@ -27,6 +29,7 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const navigation = useNavigation(); // Initialize navigation
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!isPasswordVisible);
@@ -50,7 +53,10 @@ const App = () => {
         // Signed up successfully
         const user = userCredential.user;
         console.log('User signed up:', user);
+        Alert.alert('Success', 'You have signed up successfully!'); // Show success message
         // You can add additional logic here, like saving user info to Firestore
+        navigation.navigate('Home'); // Navigate to HomePage
+        
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -126,7 +132,7 @@ const App = () => {
             <TouchableOpacity className="bg-[#C5A1FF] rounded-lg p-4 items-center mb-5"onPress={handleSignUp}>
               <Text className="text-purple-900 text-lg font-bold">Sign Up</Text>
             </TouchableOpacity>
-            <Text className="text-white text-center mb-2 mt-8">
+            <Text className="text-white text-center mb-2">
               Already a member?{' '}
               <Text
                 className="text-blue-500"
@@ -134,7 +140,8 @@ const App = () => {
                 Login
               </Text>
             </Text>
-           
+         
+
             <LoginPage
               isVisible={isLoginVisible}
               onClose={() => setLoginVisible(false)}

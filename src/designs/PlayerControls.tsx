@@ -1,15 +1,14 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { iconSize } from './dimensions';
-import TrackPlayer, { useIsPlaying } from "react-native-track-player";
+import {iconSize} from './dimensions';
+import TrackPlayer, {useIsPlaying} from 'react-native-track-player';
 
-export const PreviousButton = ({ size = iconSize.lg }) => {
+export const PreviousButton = ({size = iconSize.lg}) => {
   const handleGoToPrevious = async () => {
-    await TrackPlayer.skipToPrevious();
+    TrackPlayer.skipToPrevious();
   };
-
   return (
     <TouchableOpacity activeOpacity={0.85} onPress={handleGoToPrevious}>
       <Ionicons name="play-skip-back-outline" size={size} color="white" />
@@ -17,21 +16,19 @@ export const PreviousButton = ({ size = iconSize.lg }) => {
   );
 };
 
-export const PlayPauseButton = ({ size = iconSize.lg }) => {
-  const isPlaying = useIsPlaying(); // Get the actual playing state from the hook
-
-  const handleTogglePlay = async () => {
-    if (isPlaying) {
-      await TrackPlayer.pause();
+export const PlayPauseButton = ({size = iconSize.lg}) => {
+  const {playing} = useIsPlaying();
+  const handleTogglePlay = () => {
+    if (playing) {
+      TrackPlayer.pause();
     } else {
-      await TrackPlayer.play();
+      TrackPlayer.play();
     }
   };
-
   return (
     <TouchableOpacity activeOpacity={0.85} onPress={handleTogglePlay}>
       <AntDesign
-        name={isPlaying ? 'pausecircleo' : 'playcircleo'}
+        name={playing ? 'pausecircleo' : 'playcircleo'}
         size={size}
         color="white"
       />
@@ -39,14 +36,21 @@ export const PlayPauseButton = ({ size = iconSize.lg }) => {
   );
 };
 
-export const NextButton = ({ size = iconSize.lg }) => {
-  const handleGoToNextSong = async () => {
-    await TrackPlayer.skipToNext();
+export const NextButton = ({size = iconSize.lg}) => {
+  const handleGoToNextSong = () => {
+    TrackPlayer.skipToNext();
   };
-
   return (
     <TouchableOpacity activeOpacity={0.85} onPress={handleGoToNextSong}>
       <Ionicons name="play-skip-forward-outline" size={size} color="white" />
     </TouchableOpacity>
   );
+};
+
+export const stopMusicPlayer = async () => {
+  try {
+    await TrackPlayer.stop();
+  } catch (error) {
+    console.error('Error stopping the music player:', error);
+  }
 };

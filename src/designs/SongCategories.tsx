@@ -25,8 +25,8 @@ const SongCategories = ({item}) => {
     await TrackPlayer.add(beforeTracks);
 
     await TrackPlayer.play();
-    await TrackPlayer.pause();
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.headingText}>{item.title}</Text>
