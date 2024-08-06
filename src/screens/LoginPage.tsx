@@ -9,32 +9,75 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';//implement Firebase function
+import {auth} from '../config/firebaseConfig';
+import { FirebaseError } from 'firebase/app';
 
-const LoginPage = ({isVisible, onClose}) => {
-  const [username, setUsername] = useState('');
+
+interface LoginPageProps{
+  isVisible: boolean;
+  onClose: () => void;
+}
+const LoginPage: React.FC<LoginPageProps> = ({ isVisible, onClose }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation();
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigation = useNavigation<any>();
 
-  const handleForgotPassword = () => {
-    // Linking.openURL('https://example.com/forgot-password');
-  };
+  const handleForgotPassword = async () => {
+    if (!email) {
+      Alert.alert('Error', 'Please enter your email to reset your password.');
+      return;
+    }
 
-  const handleForgotUsername = () => {
-    // Linking.openURL('https://example.com/forgot-username');
-  };
-
-  const handleLogin = () => {
-    // Perform authentication logic here
-
-    if (username && password) {
-      onClose(); // Close the modal
-      navigation.navigate('Home'); // Navigate to HomePage
+    try {
+      await sendPasswordResetEmail(auth, email);
+      Alert.alert('Success', 'Password reset email sent. Please check your inbox.');
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('An unknown error occurred');
+      }
     }
   };
 
+  const handleForgotUsername = () => {
+    Alert.alert('Hint', 'Usernames are typically your email address. Please try using your registered email.');
+  };
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      onClose(); // Close the modal
+      navigation.navigate('Home'); // Navigate to HomePage
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        switch (error.code) {
+          case 'auth/user-not-found':
+            Alert.alert('Error', 'No user found with this email. Please sign up first.');
+            break;
+          case 'auth/wrong-password':
+            Alert.alert('Error', 'Invalid credentials. Please check your email and password.');
+            break;
+          case 'auth/invalid-email':
+            Alert.alert('Error', 'Invalid email format. Please enter a valid email.');
+            break;
+          default:
+            Alert.alert('Error', 'An error occurred. Please try again.');
+            break;
+        }
+      } else {
+        // Handle unexpected errors
+        Alert.alert('Error', 'An unexpected error occurred.');
+      }
+    }
+  };
+  
   return (
     <Modal
       animationType="slide"
@@ -69,8 +112,8 @@ const LoginPage = ({isVisible, onClose}) => {
                   className="border-purple-900 border-2 rounded-lg p-4 mb-5 text-white"
                   placeholder="Username/Email"
                   placeholderTextColor="white"
-                  value={username}
-                  onChangeText={setUsername}
+                  value={email}
+                  onChangeText={setEmail}
                 />
                 <TextInput
                   className="border-purple-900 border-2 rounded-lg p-4 mb-5 text-white"
@@ -93,6 +136,9 @@ const LoginPage = ({isVisible, onClose}) => {
                   onPress={handleLogin}>
                   <Text className="text-gray-200 text-lg font-bold">Login</Text>
                 </TouchableOpacity>
+                {errorMessage ? (
+                <Text className="text-red-500 text-center">{errorMessage}</Text>
+              ) : null}
                 <View className="my-4 items-center">
                   <Text className="text-white text-lg">or</Text>
                 </View>
