@@ -85,7 +85,7 @@ const App = () => {
           keyboardShouldPersistTaps="handled">
           <View className="flex-1 justify-center p-5">
             <View className="items-center mb-5">
-              <Text className="text-white text-4xl font-bold">Sign Up</Text>
+              <Text className="text-white text-4xl font-bold mb-4">Sign Up</Text>
             </View>
 
             <TextInput
