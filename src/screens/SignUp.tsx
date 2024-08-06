@@ -134,26 +134,7 @@ const App = () => {
                 Login
               </Text>
             </Text>
-            <Text className="text-white text-center mb-2">or</Text>
-            <TouchableOpacity className="flex-row bg-[#C5A1FF] rounded-lg p-4 items-center justify-center mb-5">
-              <Image
-                source={require('../assets/images/facebook-icon.png')}
-                className="w-6 h-6 mr-2"
-              />
-              <Text className="text-purple-900 text-lg ml-2">
-                Signup with Facebook
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="flex-row border-purple-300 border-2 rounded-lg p-4 items-center justify-center mb-2">
-              <Image
-                source={require('../assets/images/google-icon.png')}
-                className="w-6 h-6 mr-2"
-              />
-              <Text className="text-white text-lg ml-2">
-                Signup with Google
-              </Text>
-            </TouchableOpacity>
-
+           
             <LoginPage
               isVisible={isLoginVisible}
               onClose={() => setLoginVisible(false)}

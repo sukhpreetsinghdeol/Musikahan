@@ -140,27 +140,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ isVisible, onClose }) => {
                 {errorMessage ? (
                 <Text className="text-red-500 text-center">{errorMessage}</Text>
               ) : null}
-                <View className="my-4 items-center">
-                  <Text className="text-white text-lg">or</Text>
-                </View>
-                <TouchableOpacity className="flex-row bg-[#A32979] rounded-lg p-4 items-center justify-center mb-5">
-                  <Image
-                    source={require('../assets/images/facebook-icon.png')}
-                    className="w-6 h-6 mr-2"
-                  />
-                  <Text className="text-gray-200 text-lg ml-2">
-                    Login with Facebook
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity className="flex-row border-purple-900 border-2 rounded-lg p-4 items-center justify-center mb-2">
-                  <Image
-                    source={require('../assets/images/google-icon.png')}
-                    className="w-6 h-6 mr-2"
-                  />
-                  <Text className="text-purple-900 text-lg ml-2">
-                    Login with Google
-                  </Text>
-                </TouchableOpacity>
+                
               </View>
             </LinearGradient>
           </LinearGradient>
